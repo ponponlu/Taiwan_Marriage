@@ -1,5 +1,5 @@
 clear all
-*cd "C:/Users/boblin/Documents/GitHub/Taiwan_Marriage"
+cd "C:/Users/boblin/Documents/GitHub/Taiwan_Marriage"
 local files : dir "./Data_Raw/PSFD_Adult_Sample/" files "*.dta" 
 foreach file in `files' {	
     local name = substr("`file'", 1,  strlen("`file'") - 4)
@@ -42,4 +42,5 @@ replace birth_year = birth_year + 1911
 gen survey_year = substr(survey_name, -4,  strlen(survey_name))
 destring survey_year,  replace
 gen age = survey_year - birth_year
-tab age
+tab age survey_year
+save "./Data_Modified/main_data_merged.dta", replace
